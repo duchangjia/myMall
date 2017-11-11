@@ -1,0 +1,14 @@
+exports.dberr=(err,res)=>{
+    res.json({
+        "status":-1,
+        "message":err||"",
+    })
+    return; 
+};
+exports.dbsuccess=(result,res,message)=>{
+    res.json({
+        "status":0,
+        "message":message||"",
+        "data":result,
+    })
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/vuex/dist/vuex.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <button type="button" @click="add">点击</button>
+        <counter></counter>
+    </div>
+    <script>
+        const counter={
+            template:'<div>数量：{{count}} 用户名：{{name}}</div>',
+            computed:{
+                count(){
+                    return this.$store.state.count;
+                },
+                name(){
+                    return this.$store.state.name;
+                }
+            },
+        }
+        const store=new Vuex.Store({
+            state:{
+                count:0,
+                name:"jack"
+            },
+            mutations:{
+                increment(state,num){
+                    state.count=num;
+                },
+                updataName(state,name){
+                    state.name=name
+                }
+            }
+        });
+        new Vue({
+            el:"#app",
+            store,
+            data:{
+                msg:"Vuex的使用",
+            },
+            components:{
+                counter,
+            },
+            methods:{
+                add(){
+                    this.$store.commit("increment",100);
+                    this.$store.commit("updataName","LInin");
+                },
+
+            }
+        })
+    </script>
+</body>
+</html>
